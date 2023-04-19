@@ -1,0 +1,20 @@
+version: "3"
+
+services:
+    scylla-node1:
+        image: scylladb/scylla:5.1.2
+        container_name: scylla-node1
+        hostname: scylla-node1
+        networks:
+            - web
+        volumes:
+            - ./data/node1:/var/lib/scylla
+        command: "--smp 1 --memory 2048MB --developer-mode 1 --listen-address 0.0.0.0 --broadcast-rpc-address 127.0.0.1"
+        ports:
+            - "9042:9042"
+            - "10000:10000"
+
+
+networks:
+    web:
+        driver: bridge
