@@ -16,7 +16,7 @@ val passwordResetModule = module {
         PasswordResetUseCase(get(), get(), get(named("sha512")), get())
     }
     single {
-        ConfirmPasswordResetUseCase()
+        ConfirmPasswordResetUseCase(get(), get(named("sha512")), get())
     }
     single<PasswordResetRepository> {
         PasswordResetScyllaRepository()

@@ -35,7 +35,7 @@ class PasswordResetUseCase(
             this.passwordResetRepository.create(
                 PasswordReset(
                     hashedToken = hashedToken,
-                    userId = user.id,
+                    email = input.email,
                 )
             )
 

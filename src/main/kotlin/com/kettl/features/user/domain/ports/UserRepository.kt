@@ -13,4 +13,5 @@ interface UserRepository {
 
     suspend fun findByEmail(email: String): User?
 
+    suspend fun delete(id: Snowflake): Boolean
 }

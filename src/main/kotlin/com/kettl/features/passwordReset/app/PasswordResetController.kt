@@ -20,6 +20,10 @@ class PasswordResetController(
     }
 
     suspend fun confirmResetPassword(call: ApplicationCall) : Result<String> {
-        return Result.success("TODO")
+        val post = call.receiveParameters()
+        val token = post["token"] ?: ""
+        val newPassword = post["newPassword"] ?: ""
+
+        return this.confirmResetPasswordUseCase.execute(ConfirmPasswordResetUseCase.Input(token, newPassword))
     }
 }

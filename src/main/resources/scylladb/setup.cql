@@ -74,9 +74,16 @@ CREATE INDEX IF NOT EXISTS organizations_name_index ON kettl.organizations (name
 
 CREATE TABLE IF NOT EXISTS kettl.password_reset
 (
-    reset_token text PRIMARY KEY,
-    user_id     bigint
+    email        text PRIMARY KEY,
+    reset_token text,
 ) WITH DEFAULT_TIME_TO_LIVE = 10800;
+
+CREATE MATERIALIZED VIEW IF NOT EXISTS kettl.password_reset_by_token AS
+SELECT email, reset_token
+FROM kettl.password_reset
+WHERE reset_token IS NOT null
+  AND email IS NOT null
+PRIMARY KEY (reset_token, email);
 
 // ESTABLISHMENTS TABLE
 // --------------------------------------------
